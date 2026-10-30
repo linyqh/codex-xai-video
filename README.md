@@ -36,6 +36,22 @@ codex plugin marketplace add git@github.com:linyqh/codex-xai-video.git && codex 
   "$CODEX" plugin marketplace add git@github.com:linyqh/codex-xai-video.git && "$CODEX" plugin add xai-video@codex-xai-video
   ```
 
+### 让 ChatGPT 桌面版帮你装
+
+在 ChatGPT 桌面版里打开 Codex，新建一个任务，把下面整段发给它。它运行命令时会请求权限（要联网、要写 `~/.codex`），批准即可：
+
+````text
+请帮我安装 Codex 插件 xai-video，仓库是 git@github.com:linyqh/codex-xai-video.git。按顺序执行，需要联网或写入 ~/.codex 时直接向我申请权限：
+
+1. 确定 codex 命令：先用 `command -v codex`，找不到就用 /Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex。下面用 CODEX 指代它。
+2. 运行 `ssh -T git@github.com`。输出里有 "successfully authenticated" 就继续（这条命令即使成功也会返回退出码 1）；否则停下，告诉我需要先配置 GitHub 的 SSH key。
+3. 运行 `CODEX plugin marketplace add git@github.com:linyqh/codex-xai-video.git`。如果提示这个市场已经存在，改为运行 `CODEX plugin marketplace upgrade codex-xai-video`。
+4. 运行 `CODEX plugin add xai-video@codex-xai-video`。
+5. 运行 `CODEX plugin list`，确认 xai-video@codex-xai-video 的状态是 installed, enabled。
+6. 检查 ~/.codex/xai-video.json 是否存在，只看是否存在，不要读取或打印它的内容。不存在的话，不要让我在对话里发 API key，而是告诉我两种配置方式：在终端执行 export XAI_API_KEY="xai-..."，或者自己创建 ~/.codex/xai-video.json，内容为 {"apiKey": "xai-..."}，然后执行 chmod 600 ~/.codex/xai-video.json。
+7. 最后提醒我：要新开一个 Codex 任务，才能用上 xai_generate_video 工具。
+````
+
 常用管理命令：
 
 | 用途 | 命令 |
