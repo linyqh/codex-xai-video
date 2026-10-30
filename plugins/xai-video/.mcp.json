@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "xai_video": {
+      "command": "./scripts/launch-mcp",
+      "args": [
+        "./dist/server.mjs"
+      ],
+      "cwd": ".",
+      "env_vars": [
+        "XAI_API_KEY",
+        "CODEX_HOME"
+      ],
+      "startup_timeout_sec": 20,
+      "tool_timeout_sec": 1800
+    }
+  }
+}

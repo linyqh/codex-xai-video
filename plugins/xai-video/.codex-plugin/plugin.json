@@ -1,0 +1,30 @@
+{
+  "name": "xai-video",
+  "version": "0.1.0",
+  "description": "Generate videos with xAI Grok Imagine and save them as MP4 files.",
+  "author": {
+    "name": "linyqh"
+  },
+  "license": "MIT",
+  "keywords": [
+    "xai",
+    "grok",
+    "video",
+    "text-to-video",
+    "image-to-video"
+  ],
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "xAI Video",
+    "shortDescription": "Text/image-to-video with Grok Imagine",
+    "longDescription": "Adds an xai_generate_video tool that submits one billed Grok Imagine job, polls it, and saves the MP4 locally. Jobs that xAI accepted are never resubmitted automatically.",
+    "developerName": "linyqh",
+    "category": "Productivity",
+    "capabilities": [
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Generate a 5-second 720p video of an orange cat stretching on a windowsill, slow push-in"
+    ]
+  }
+}

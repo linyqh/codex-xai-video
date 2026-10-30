@@ -1,0 +1,25 @@
+#!/bin/sh
+set -eu
+
+# The server runs in the session directory, so resolve the bundle against this script.
+plugin_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+server="$plugin_root/${1#./}"
+[ "$#" -gt 0 ] && shift
+
+PATH="${PATH:-/usr/bin:/bin}:/opt/homebrew/bin:/usr/local/bin"
+export PATH
+
+cache_root=${XDG_CACHE_HOME:-${HOME:-}/.cache}
+for candidate in \
+  "${CODEX_MCP_NODE_PATH:-}" \
+  "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node" \
+  "$cache_root/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node" \
+  "$(command -v node 2>/dev/null || true)"
+do
+  if [ -n "$candidate" ] && [ -x "$candidate" ]; then
+    exec "$candidate" "$server" "$@"
+  fi
+done
+
+printf '%s\n' 'xai-video: no Node.js runtime found; install Node 20+ or update Codex.' >&2
+exit 127

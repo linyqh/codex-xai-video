@@ -1,0 +1,17 @@
+{
+  "name": "codex-xai-video",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Codex plugin: generate videos with xAI Grok Imagine",
+  "type": "module",
+  "scripts": {
+    "build": "bun build src/server.ts --target=node --format=esm --outfile plugins/xai-video/dist/server.mjs",
+    "check": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.0"
+  }
+}
